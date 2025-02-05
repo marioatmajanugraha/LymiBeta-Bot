@@ -33,12 +33,13 @@ python main.py
 
 Ikuti instruksi yang muncul di terminal untuk memasukkan username dan jumlah email yang ingin didaftarkan.
 
-Script Code by - @balveerxyz || Lymi Beta BOT
+```
 Masukan Username: exampleuser
 Berapa email yang mau di submit? 2
 [Success] - Register exampleuser12345@mailnesia.com
 [Success] - Register exampleuser67890@mailnesia.com
 Berhasil - 2 Email Terdaftar, Gagal - 0 Email
+```
 
 **Catatan**
 Pastikan Anda memiliki koneksi internet yang stabil saat menjalankan bot ini.
