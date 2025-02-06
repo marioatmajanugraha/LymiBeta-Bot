@@ -100,8 +100,8 @@ def main():
             # Add a 2-second delay between submissions
             time.sleep(2)
 
-        # Save successful emails to file
-        with open("accounts.txt", "w") as f:
+        # Append successful emails to file
+        with open("accounts.txt", "a") as f:
             for email in successful_emails:
                 f.write(email + "\n")
 
