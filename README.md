@@ -9,6 +9,9 @@ LymiBeta-Bot adalah sebuah bot untuk membantu pendaftaran email secara otomatis 
 - Menyimpan daftar email yang berhasil didaftarkan ke dalam file `accounts.txt`.
 - Menampilkan log status pendaftaran email (sukses/gagal).
 
+**New Update**
+- Add proxy 
+
 ## Prasyarat
 
 Pastikan Anda telah menginstal semua dependensi yang diperlukan sebelum menjalankan bot ini. Anda dapat menginstalnya dengan menjalankan perintah berikut:
