@@ -2,12 +2,15 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
 import random
 import string
 from colorama import Fore, Style, init
 import pyfiglet
 import time
+import os
 
 # Initialize colorama
 init()
@@ -24,8 +27,10 @@ def generate_email(username):
 
 def submit_email(driver, email):
     try:
-        # Find the email input field and enter the email
-        email_input = driver.find_element(By.ID, "form-field-input-306dde85-d3cf-4ccf-2653-bc0b8fe6a979-:R3b:")
+        # Wait for the email input field to be available
+        email_input = WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.XPATH, "//input[@type='email']"))
+        )
         email_input.clear()
         email_input.send_keys(email)
 
@@ -55,6 +60,19 @@ def main():
     chrome_options.add_argument('--no-sandbox')
     chrome_options.add_argument('--disable-dev-shm-usage')
     chrome_options.add_argument('--log-level=3')  # Suppress log output
+
+    # Check for proxy file
+    proxy_file_path = 'proxy.txt'
+    if os.path.exists(proxy_file_path):
+        with open(proxy_file_path, 'r') as proxy_file:
+            proxy = proxy_file.read().strip()
+            if proxy:
+                chrome_options.add_argument(f'--proxy-server={proxy}')
+                print(Fore.YELLOW + f"[Info] - Using proxy: {proxy}" + Style.RESET_ALL)
+            else:
+                print(Fore.YELLOW + "[Info] - No proxy found in proxy.txt, continuing without proxy." + Style.RESET_ALL)
+    else:
+        print(Fore.YELLOW + "[Info] - proxy.txt not found, continuing without proxy." + Style.RESET_ALL)
 
     # Initialize the driver
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
